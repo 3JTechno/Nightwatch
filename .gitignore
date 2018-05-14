@@ -1,4 +1,6 @@
 .vscode
-.node_modules
-.package-lock.json
-.selenium-debug.log
+node_modules
+package-lock.json
+selenium-debug.log
+reports
+screenshots

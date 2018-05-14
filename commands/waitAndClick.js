@@ -7,10 +7,10 @@ function waitAndClick() {
 
 util.inherits(waitAndClick, events.EventEmitter);
 
-waitAndClick.prototype.command = function(element,browser) {
+waitAndClick.prototype.command = function(element, browser) {
   browser
-  .waitForElementVisible(element)
-  .click(element)
+    .waitForElementVisible(element)
+    .click(element)
 
   setTimeout(()=>{
     this.emit('complete');

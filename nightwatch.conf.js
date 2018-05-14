@@ -8,14 +8,14 @@ module.exports = {
   "output_folder": "./reports", // reports (test outcome) output by nightwatch
   "selenium": {
     "start_process": true, // tells nightwatch to start/stop the selenium process
-    "server_path": "../lib/selenium-server-standalone-3.8.0.jar",
+    "server_path": "../selenium-server-standalone-3.8.0.jar",
     "launch_url": "http://localhost:4444/wd/hub",
     "host": "127.0.0.1",
     "port": 4444, // standard selenium ports
     "cli_args": {
       "webdriver.chrome.driver" : "node_modules/chromedriver/bin/chromedriver",
       "webdriver.gecko.driver" : "node_modules/geckodriver/bin/geckodriver", 
-      "webdriver.edge.driver" : "../lib/MicrosoftWebDriver.exe"
+      "webdriver.edge.driver" : "../MicrosoftWebDriver.exe"
     }
   },
   //Whether or not to run individual test files in parallel. If set to "true", runs the tests in parallel and determines the number of workers automatically. 
