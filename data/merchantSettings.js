@@ -7,6 +7,7 @@ module.exports={
         "phone": "(555) 111-6666",
         "timezone": "America/New_York",
         businessHours:{
+            "startTime": "09:00am",
         },
         customer1:{
             "firstName": "jeremy",
@@ -22,6 +23,7 @@ module.exports={
         "staff1Id": "167578524",
         "staff2": "Staff 2",
     },
+    /* Other Merchants Account data
 
     "jeremyCarRemovalProd":{
         "url": "https://test6.no.genbook.com/bookings/app/reservation/30367670",
@@ -133,5 +135,5 @@ module.exports={
             "end": "11:30Pm",
         },
     },
-    
+    */
 }

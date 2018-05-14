@@ -3,10 +3,9 @@ module.exports={
     "contactDetails":{
         "userName": "jeremy.genbook@gmail.com",
         "password": "Genbook$",
-        "firstname": "automation",
-        "lastname" : "nightwatch",
-        "phone" : "5551114569",
-        "formattedphone": "(555) 111-4569",
+        "firstName": "automation",
+        "lastName" : "nightwatch",
+        "phone" : "(202) 555-0133",
         "email" : "automation.nightwatch.1@gmail.com",
         "info" : "This is an automated test done through Nightatch...This is an automated \
         test done through Nightatch...This is an automated test done through Nightatch..."
