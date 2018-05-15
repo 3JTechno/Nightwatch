@@ -11,7 +11,6 @@ module.exports={
         //Login to booking manager
         browser.resizeWindow(1280, 800);
         functions.login(browser, merchant.username, merchant.password)
-        
     },
  
     'create_offline_booking': function(browser){
@@ -27,6 +26,7 @@ module.exports={
         let service = merchant.service2                         //define what service from the merchant is being used in this test
         let serviceDuration = merchant.service2Duration         // see above
         let staff = merchant.staff1                             //define what staff from the merchant is being used in this test
+        let note = "Unique booking Id = " + uniqueId
 
         //Page objects creation
         var appointmentTab = browser.page.pageObject()
@@ -87,7 +87,6 @@ module.exports={
         appointmentTab.expect.element('@phone').text.to.equals(contactDetails.phone)
 
         //Add a note
-        let note = "Unique booking Id = " + uniqueId
         appointmentTab
             .waitAndClick('@memoBox', browser)
             .waitForElementVisible('@memoTextArea')
