@@ -1,7 +1,5 @@
 let elements = {
     
-    //Customer Profile Tab
-
     firstName:{
         "selector": '//input[@name="booking_firstName"]',
     },

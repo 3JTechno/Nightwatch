@@ -6,12 +6,11 @@ module.exports={
     'login': function(browser, username, password){
 
         //Login to booking manager
-
         browser.url(browser.launchUrl);
 
-        var appointmentTab = browser.page.pageObject()
+        var calendar = browser.page.calendar()
 
-        appointmentTab
+        calendar
             .waitAndClick('@logInButton', browser)
             .waitAndClick('@loginEmail', browser)
             .setValue('@loginEmail', username)
@@ -19,6 +18,58 @@ module.exports={
             .setValue('@loginPassword', password)
             .click('@loginSubmitButton')
         this.switch_iframe("calendar", browser)
+
+    },
+
+    'clear_appointments': function(browser){
+
+        //Function used to clear all existing appointment currently present on the calendar.
+        //This allows to ensure a test always start with a clear calendar (in case a previous test fails and leave undeleted appointment).
+
+        let listElement = []
+        let listId = []
+
+        browser
+            .elements('xpath', '//body/div', function(result){
+                listElement = result.value
+            })
+            .perform(function(done){
+                listElement.forEach(function (element){
+                    browser.elementIdAttribute(element.ELEMENT, 'id', function(id){
+                        if(id.value.substring(0, 3) == "167"){
+                            listId.push(id.value)
+                        }
+                    })
+                })
+                done()
+            })
+            .perform((done) => { //The arrow function allow to not create a context so "this" will still refer to the main object so all the functions listed in this object are accessible (i.e."delete_appointment").
+                if(listId.length > 0){
+                    console.log('Found ' + listId.length + ' appointments...deletion in progress')
+                    listId.forEach((element) => {
+                        this.delete_appointment(browser, '//div[@id="' + element + '"]')
+                    })    
+                }
+                done()
+            })
+    },
+
+    'delete_appointment': function(browser, xpath){
+
+        //Use xpath to delete a appointment on the calendar
+        
+        let calendar = browser.page.calendar()
+        let appointmentTab = browser.page.appointmentTab()
+
+        calendar
+            .moveToElement(xpath,10 ,10)
+            .click(xpath)
+        this.switch_iframe('bookingForm', browser)
+        appointmentTab
+            .waitAndClick('@cancelAppointment', calendar)
+            .waitAndClick('@confirmationYes', calendar)
+        this.switch_iframe('calendar', browser)
+        calendar.expect.element(xpath).to.not.be.present
 
     },
 
@@ -36,7 +87,6 @@ module.exports={
     'find_day_number': function(){
 
         //Convert today's day to numeric (Mon = 2, Tue = 3...)
-
         let todayDate = momentTimezone.tz(merchantData.timezone)
         if(moment(todayDate).day() != "SUN" ? dayOfTheWeek = moment(todayDate).weekday() + 1 : dayOfTheWeek = 1)
 
@@ -51,19 +101,29 @@ module.exports={
                 .frameParent()
                 .waitForElementVisible("//iframe[@id='booking_frame']")
                 .frame("booking_frame")
+                .pause(2000) //Need to find a way to assert when all elements are fully loaded instead of using a wait fct
+
         }else if(frame == "calendar"){
             browser
                 .frameParent()
                 .waitForElementVisible("//iframe[@id='ps-group-day']")
                 .frame("ps-group-day")
+                .pause(4000) //Need to find a way to assert when all elements are fully loaded instead of using a wait fct
+
         }
     },
 
     'generate_unique_id': function(){
 
         //Create an unique id
-
         let today = new Date()
         return today.getTime() // we use time from 1970 to always get a unique id
+    },
+
+    'capitalize_first_letter': function(word){
+
+        //Transform first letter of a word in capital letter
+        return word.replace(/\b\w/g, l => l.toUpperCase());
+    
     }
 }

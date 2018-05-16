@@ -1,38 +1,5 @@
 let elements = {
-    //Login Page Elements
-    "logInButton":{
-        "selector":'//li[@id="sign-in"]'
-    },
-    "loginEmail":{
-        "selector":'//input[@id="email"]'
-    },
-    "loginPassword":{
-        "selector":'//input[@id="password"]'
-    },
-    "loginSubmitButton":{
-        "selector":'//input[@id="loginSubmitButton"]'
-    },
 
-    //Calendar Elements
-    "addAppointment":{
-        "selector":'//div[@id="genbook-add-new-calendar-button"]'
-    },
-    "appointmentSlotName":{
-        "selector":'//div[@class="nameSummary"]/div[@class="namePhone"]/span/span'
-    },
-    "appointmentSlotService":{
-        "selector":'//div[@class="nameSummary"]/div[@class="service"]'
-    },
-    "appointmentSlotPhone":{
-        "selector":'//div[@class="nameSummary"]/div[@class="phone"]'
-    },
-    "appointmentSlotMemo":{
-        "selector":'//div[@class="memoSummary"]'
-    },
-
-    //Booking Form Elements
-    
-    //Appointment Tab
     "customerSearch":{
         "selector":'//div[@title="Customer"]/input'
     },
@@ -71,6 +38,9 @@ let elements = {
     },
     "cancelAppointment":{
         "selector":'//a[@class="ui left floated  booking_cancel"]'
+    },
+    cancelAppointmentConfirmation:{
+        'selector': '//div[@class="save-box "]/section[@class="header"]'
     },
     "confirmationYes":{
         "selector":'//div[text()="Yes"]'
