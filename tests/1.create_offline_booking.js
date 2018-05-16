@@ -11,6 +11,8 @@ module.exports={
         //Login to booking manager
         browser.resizeWindow(1280, 800);
         functions.login(browser, merchant.username, merchant.password)
+        functions.clear_appointments(browser)
+
     },
  
     'create_offline_booking': function(browser){
@@ -27,17 +29,17 @@ module.exports={
         let serviceDuration = merchant.service2Duration         // see above
         let staff = merchant.staff1                             //define what staff from the merchant is being used in this test
         let note = "Unique booking Id = " + uniqueId
+        let capFirstName = functions.capitalize_first_letter(contactDetails.firstName) //Booking form capitalise the first letter of customer's names
+        let capLastName = functions.capitalize_first_letter(contactDetails.lastName) //Booking form capitalise the first letter of customer's names
 
         //Page objects creation
-        var appointmentTab = browser.page.pageObject()
+        var calendar = browser.page.calendar()
+        var appointmentTab = browser.page.appointmentTab()
         var customerTab = browser.page.customerTab()
 
         //Open booking form by clicking on calendar slot
-        browser
-            .waitForElementVisible('//div[@id="' + slotId + '"]')
-            .pause(4000) //here we wait until Javascript (JQuery) finishes his job
-            .click('//div[@id="' + slotId + '"]')
-        functions.switch_iframe("bookingForm", browser)
+        calendar.waitAndClick('//div[@id="' + slotId + '"]', appointmentTab)
+        functions.switch_iframe('bookingForm', browser)
 
         //Select a staff
         appointmentTab
@@ -82,7 +84,7 @@ module.exports={
             .click('@back')
 
         //Verify correct customer is selected
-        appointmentTab.expect.element('//div[@title="Customer"]/div[@class="default text"]/div').text.to.equal(contactDetails.firstName.capitalizeFirstLetter() + " " + contactDetails.lastName.capitalizeFirstLetter())
+        appointmentTab.expect.element('//div[@title="Customer"]/div[@class="default text"]/div').text.to.equal(capFirstName + " " + capLastName)
         appointmentTab.expect.element('@email').text.to.equals(email)
         appointmentTab.expect.element('@phone').text.to.equals(contactDetails.phone)
 
@@ -98,22 +100,24 @@ module.exports={
 
         //Verify Appointment is displayed on the calendar
         functions.switch_iframe("calendar", browser)
-        appointmentTab.waitForElementVisible('@appointmentSlotName')
-        appointmentTab.expect.element('@appointmentSlotName').text.to.equal(contactDetails.firstName.capitalizeFirstLetter() + " " + contactDetails.lastName.capitalizeFirstLetter())
-        appointmentTab.expect.element('@appointmentSlotService').text.to.equal(service)
-        appointmentTab.expect.element('@appointmentSlotPhone').text.to.equal(contactDetails.phone)
-        appointmentTab.expect.element('@appointmentSlotMemo').text.to.equal('"' + note + '"') //Calendar displays memo between quotes
+        calendar.waitForElementVisible('@appointmentSlotName')
+        calendar.expect.element('@appointmentSlotName').text.to.equal(capFirstName + " " + capLastName)
+        calendar.expect.element('@appointmentSlotService').text.to.equal(service)
+        calendar.expect.element('@appointmentSlotPhone').text.to.equal(contactDetails.phone)
+        calendar.expect.element('@appointmentSlotMemo').text.to.equal('"' + note + '"') //Calendar displays memo between quotes
 
         //Select appointment from calendar and delete.
-        appointmentTab.click("//div[@class='memoSummary'][text()='\"" + note + "\"']")
+        calendar.click("//div[@class='memoSummary'][text()='\"" + note + "\"']")
         functions.switch_iframe("bookingForm", browser)
         appointmentTab
             .waitForElementVisible('//span[@class="service-name"][text()="' + service + '"]')
             .click('@cancelAppointment')
+            .expect.element('@cancelAppointmentConfirmation').text.to.contain("Confirm cancellation")
+        appointmentTab
             .waitForElementVisible('@confirmationYes')
             .click('@confirmationYes')
         functions.switch_iframe("calendar", browser)
-        appointmentTab
+        calendar
             .waitForElementVisible('@addAppointment')
             .expect.element("//div[@class='memoSummary'][text()='\"" + note + "\"']").to.not.be.present
 
@@ -125,6 +129,3 @@ module.exports={
 }
 
 
-String.prototype.capitalizeFirstLetter = function() {
-    return this.replace(/\b\w/g, l => l.toUpperCase());
-}

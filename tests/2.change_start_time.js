@@ -11,7 +11,8 @@ module.exports={
         //Login to booking manager
         browser.resizeWindow(1280, 800);
         functions.login(browser, merchant.username, merchant.password)
-      
+        functions.clear_appointments(browser)
+
     },
  
     'change_start_time': function(browser){
@@ -22,25 +23,22 @@ module.exports={
         let uniqueId = functions.generate_unique_id()               // we use time from 1970 to always get a unique email address
         let slotId= functions.find_slotId(merchant.businessHours.startTime, merchant.staff1Id, merchant.timezone)
         let service = merchant.service1
-        let newTime = "12:00am"
+        let newTime = '12:00pm'
         let newSlotId = functions.find_slotId(newTime, merchant.staff1Id, merchant.timezone)
-        let note = "Unique booking Id = " + uniqueId
+        let note = 'Unique booking Id = ' + uniqueId
 
         //Page objects creation
-        var appointmentTab = browser.page.pageObject()
+        var calendar = browser.page.calendar()
+        var appointmentTab = browser.page.appointmentTab()
 
         //Open booking form by clicking on calendar slot
-        browser
-            .waitForElementVisible('//div[@id="' + slotId + '"]')
-            .pause(4000) //here we wait until Javascript (JQuery) finishes his job
-            .click('//div[@id="' + slotId + '"]')
-        functions.switch_iframe("bookingForm", browser)
+        calendar.waitAndClick('//div[@id="' + slotId + '"]', appointmentTab)
 
         //Select service
-        appointmentTab.expect.element('@staffDropDown').text.equal(merchant.staff1) //Default Staff
+        functions.switch_iframe('bookingForm', browser)
         appointmentTab
             .click('@serviceDropDown')
-            .click('//span[text()="' + service + '"]')
+            .waitAndClick('//span[text()="' + service + '"]', appointmentTab)
             .expect.element('//span[@class="service-name"]').text.to.equal(service)
         
         //Add a note
@@ -55,38 +53,51 @@ module.exports={
 
         //Verify Appointment is displayed on the calendar
         functions.switch_iframe("calendar", browser)
-        appointmentTab.waitForElementVisible('@appointmentSlotMemo')
-        appointmentTab.expect.element('@appointmentSlotMemo').text.to.equal('"' + note + '"') //Calendar displays memo between quotes
+        calendar
+            .waitForElementVisible('@appointmentSlotMemo')
+            .expect.element('@appointmentSlotMemo').text.to.equal('"' + note + '"') //Calendar displays memo between quotes
 
-        //Select appointment from calendar and change time
-        appointmentTab.click("//div[@class='memoSummary'][text()='\"" + note + "\"']")
+        //Select appointment from calendar
+        calendar.click("//div[@class='memoSummary'][text()='\"" + note + "\"']")
+        functions.switch_iframe('bookingForm', browser)
+
+        //Change time
+        appointmentTab
+            .waitAndClick('@timeDropDown', browser)
+            .moveToElement('//div[@class="item"][text()="' + newTime + '"]',10 ,10)
+            .click('//div[@class="item"][text()="' + newTime + '"]')
+            .expect.element('@timeDropDown').text.equal(newTime)
+
+        //Save appointment
+        appointmentTab.click('@saveButton')
+        
+        //Reopen appointment
+        functions.switch_iframe("calendar", browser)
+        calendar
+            .waitForElementVisible('@addAppointment')
+        browser
+            .moveToElement("//div[@class='memoSummary'][text()='\"" + note + "\"']",10 ,10)
+            .click("//div[@class='memoSummary'][text()='\"" + note + "\"']")
         functions.switch_iframe("bookingForm", browser)
+
+        //Check time has changed
         appointmentTab
             .waitForElementVisible('@serviceDropDown')
-            .waitAndClick('@timeDropDown', browser)
-        browser
-            .moveToElement('//div[@class="item"][text()="' + newTime + '"]',10 ,10)
-            .pause(4000)
-            .click('//div[@class="item"][text()="' + newTime + '"]')
-        appointmentTab.expect.element('@timeDropDown').text.equal(newTime)
+            .expect.element('@timeDropDown').text.equal(newTime)
+
+        //Cancel appointment
         appointmentTab
-            .click('@saveButton')
+            .waitAndClick('@cancelAppointment', browser)
+            .waitForElementVisible('@confirmationYes')
+            .click('@confirmationYes')
         functions.switch_iframe("calendar", browser)
-        appointmentTab
+        calendar
             .waitForElementVisible('@addAppointment')
-        browser 
-            .moveToElement("//div[@class='memoSummary'][text()='\"" + note + "\"']",10 ,10)
-            .getAttribute("//div[@class='memoSummary'][text()='\"" + note + "\"']", 'Id', function(result){
-                this.assert.equal(result.value, newSlotId)
-            })
+            .expect.element("//div[@class='memoSummary'][text()='\"" + note + "\"']").to.not.be.present
     },
 
     after: function (browser){
+        
         browser.end();
     }
-}
-
-
-String.prototype.capitalizeFirstLetter = function() {
-    return this.replace(/\b\w/g, l => l.toUpperCase());
 }
