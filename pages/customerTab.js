@@ -1,5 +1,5 @@
 let elements = {
-    
+
     firstName:{
         "selector": '//input[@name="booking_firstName"]',
     },

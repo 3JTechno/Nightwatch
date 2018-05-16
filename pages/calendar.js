@@ -30,7 +30,6 @@ let elements = {
         selector:'//div[@class="memoSummary"]'
     },
 }
-    
 
 for (key in elements){
     if (elements.hasOwnProperty(key)){
