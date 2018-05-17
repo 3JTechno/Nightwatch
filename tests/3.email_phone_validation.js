@@ -1,6 +1,5 @@
 var contactDetails = require('../data/testData').contactDetails
 var merchant = require('../data/merchantSettings').nightwatchTest2
-var moment = require('moment')
 var momentTimezone = require('moment-timezone')
 var functions = require('../functions.js')
 
@@ -32,8 +31,9 @@ module.exports={
         var customerTab = browser.page.customerTab()
 
         //Open booking form by clicking on calendar slot
-        calendar.waitAndClick('//div[@id="' + slotId + '"]', appointmentTab)
-        functions.switch_iframe('bookingForm', browser)
+        calendar
+            .waitAndClick('//div[@id="' + slotId + '"]')
+            .switchFrame('bookingForm')
 
         //Enter customer details
         appointmentTab.click('@addCustomer')

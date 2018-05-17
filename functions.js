@@ -11,13 +11,14 @@ module.exports={
         var calendar = browser.page.calendar()
 
         calendar
-            .waitAndClick('@logInButton', browser)
-            .waitAndClick('@loginEmail', browser)
+            .waitAndClick('@logInButton')
+            .waitAndClick('@loginEmail')
             .setValue('@loginEmail', username)
             .clearValue('@loginPassword')
             .setValue('@loginPassword', password)
             .click('@loginSubmitButton')
-        this.switch_iframe("calendar", browser)
+            .waitAndClick('@setupAssistantCloseBtn') //here we are closing the setup assistant pop down which overlay on the calendar and can cause element to not be visible :-(
+            .switchFrame('calendar-day-view')
 
     },
 
@@ -64,13 +65,12 @@ module.exports={
         calendar
             .moveToElement(xpath,10 ,10)
             .click(xpath)
-        this.switch_iframe('bookingForm', browser)
+            .switchFrame('bookingForm')
         appointmentTab
-            .waitAndClick('@cancelAppointment', calendar)
-            .waitAndClick('@confirmationYes', calendar)
-        this.switch_iframe('calendar', browser)
+            .waitAndClick('@cancelAppointment')
+            .waitAndClick('@confirmationYes')
+            .switchFrame('calendar-day-view')
         calendar.expect.element(xpath).to.not.be.present
-
     },
 
     'find_slotId': function(start, customerId, timezone){
@@ -93,26 +93,6 @@ module.exports={
         return dayOfTheWeek
     },
 
-    'switch_iframe': function(frame, browser){
-
-        //Switch between calendar iframe  and booking form iframe
-        if(frame == "bookingForm"){
-            browser
-                .frameParent()
-                .waitForElementVisible("//iframe[@id='booking_frame']")
-                .frame("booking_frame")
-                .pause(2000) //Need to find a way to assert when all elements are fully loaded instead of using a wait fct
-
-        }else if(frame == "calendar"){
-            browser
-                .frameParent()
-                .waitForElementVisible("//iframe[@id='ps-group-day']")
-                .frame("ps-group-day")
-                .pause(4000) //Need to find a way to assert when all elements are fully loaded instead of using a wait fct
-
-        }
-    },
-
     'generate_unique_id': function(){
 
         //Create an unique id
@@ -124,6 +104,16 @@ module.exports={
 
         //Transform first letter of a word in capital letter
         return word.replace(/\b\w/g, l => l.toUpperCase());
-    
+    },
+
+    'add_note': function(note, appointmentTab){
+
+        //Add a note to the booking form
+        appointmentTab
+            .waitAndClick('@memoBox')
+            .waitForElementVisible('@memoTextArea')
+            .clearValue('@memoTextArea')
+            .setValue('@memoTextArea', note)
+            .expect.element('@memoTextArea').text.to.equal(note)
     }
 }

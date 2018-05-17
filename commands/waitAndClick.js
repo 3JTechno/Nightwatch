@@ -7,8 +7,9 @@ function waitAndClick() {
 
 util.inherits(waitAndClick, events.EventEmitter);
 
-waitAndClick.prototype.command = function(element, browser) {
-  browser
+waitAndClick.prototype.command = function(element) {
+  
+  this.api
     .waitForElementVisible(element)
     .click(element)
 

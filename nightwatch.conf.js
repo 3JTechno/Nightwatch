@@ -32,7 +32,7 @@ module.exports = {
                 "path": SCREENSHOT_PATH // save screenshots here
             },
             "globals": {
-                "waitForConditionTimeout": 10000 // sometimes internet is slow so wait.
+                "waitForConditionTimeout": 5000 // sometimes internet is slow so wait.
                 //"retryAssertionTimeout": 5000
             },
             "desiredCapabilities": { //  the default browser for tests

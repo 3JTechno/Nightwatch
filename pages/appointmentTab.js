@@ -45,6 +45,9 @@ let elements = {
     confirmationYes:{
         selector:'//div[text()="Yes"]'
     },
+    closeBtn:{
+        selector: '//button[@class="close_button2"]'
+    }
 
 }
     

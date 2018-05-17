@@ -14,8 +14,14 @@ let elements = {
     },
 
     //Calendar Elements
+    setupAssistantCloseBtn:{
+        selector: '//div[@class="close-setup-box"]/img'
+    },
     addAppointment:{
         selector:'//div[@id="genbook-add-new-calendar-button"]'
+    },
+    weekView:{
+        selector:'//div[@id="resource_ + merchant.staff1Id + "]/div[@class="calheaderWrapper"]/div[@class="calselect"]/div[2]'
     },
     appointmentSlotName:{
         selector:'//div[@class="nameSummary"]/div[@class="namePhone"]/span/span'
