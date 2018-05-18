@@ -1,3 +1,5 @@
+var util = require('util');
+
 let elements = {
     //Login Page Elements
     logInButton:{
@@ -14,8 +16,14 @@ let elements = {
     },
 
     //Calendar Elements
+    setupAssistantCloseBtn:{
+        selector: '//div[@class="close-setup-box"]/img'
+    },
     addAppointment:{
         selector:'//div[@id="genbook-add-new-calendar-button"]'
+    },
+    weekView:{
+        selector:'//div[@id="resource_ + merchant.staff1Id + "]/div[@class="calheaderWrapper"]/div[@class="calselect"]/div[2]'
     },
     appointmentSlotName:{
         selector:'//div[@class="nameSummary"]/div[@class="namePhone"]/span/span'
@@ -29,6 +37,9 @@ let elements = {
     appointmentSlotMemo:{
         selector:'//div[@class="memoSummary"]'
     },
+    slot: {
+        selector: '//div[@id="%s"]'
+    }
 }
 
 for (key in elements){
@@ -39,5 +50,14 @@ for (key in elements){
 
 module.exports = {
   url:"",
-  elements: elements
+  elements: elements,
+  commands: [
+    {
+    //This function allows to inject a dynamic variable into a fixe selector
+      El: function (locator, variable) {
+        element = this.elements[locator.slice(1)].selector
+        return util.format(element, variable)
+      }
+    }
+  ],
 };
