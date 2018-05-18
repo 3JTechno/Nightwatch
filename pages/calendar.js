@@ -25,6 +25,12 @@ let elements = {
     weekView:{
         selector:'//div[@id="resource_ + merchant.staff1Id + "]/div[@class="calheaderWrapper"]/div[@class="calselect"]/div[2]'
     },
+    blockText:{ //Text that is displayed on a block appointment
+        selector: '//div[@class="heldtext"][text()="Blocked"]' 
+    },
+    blockBtn:{ //Small button that appears when hovering on a calendar slot
+        selector: '//img[@id="bt_block"]'
+    },
     appointmentSlotName:{
         selector:'//div[@class="nameSummary"]/div[@class="namePhone"]/span/span'
     },
@@ -54,7 +60,7 @@ module.exports = {
   commands: [
     {
     //This function allows to inject a dynamic variable into a fixe selector
-      El: function (locator, variable) {
+      el: function (locator, variable) {
         element = this.elements[locator.slice(1)].selector
         return util.format(element, variable)
       }

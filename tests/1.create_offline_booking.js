@@ -105,25 +105,10 @@ module.exports = {
         calendar.expect.element('@appointmentSlotPhone').text.to.equal(contactDetails.phone);
         calendar.expect.element('@appointmentSlotMemo').text.to.equal('"' + note + '"'); //Calendar displays memo between quotes
 
-        //Select appointment from calendar and delete.
-        calendar
-            .click("//div[@class='memoSummary'][text()='\"" + note + "\"']")
-            .switchFrame('bookingForm');
-        appointmentTab
-            .waitForElementVisible('//span[@class="service-name"][text()="' + service + '"]')
-            .click('@cancelAppointment')
-            .expect.element('@cancelAppointmentConfirmation').text.to.contain("Confirm cancellation");
-        appointmentTab
-            .waitForElementVisible('@confirmationYes')
-            .click('@confirmationYes')
-            .switchFrame('calendar-day-view');
-        calendar
-            .waitForElementVisible('@addAppointment')
-            .expect.element("//div[@class='memoSummary'][text()='\"" + note + "\"']").to.not.be.present;
-
     },
 
     after: function (browser) {
+        functions.clear_appointments(browser)
         browser.end();
     }
 }
