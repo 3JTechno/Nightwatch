@@ -109,14 +109,11 @@ module.exports={
             .waitAndClick('@cancelAppointment')
             .waitAndClick('@confirmationYes')
             .switchFrame('calendar-day-view')
-
-        //Verify appointment no longer appear on calendar
-        calendar
-            .expect.element("//div[@class='memoSummary'][text()='\"" + note + "\"']").to.not.be.present
+            
     },
 
     after: function (browser){
-        
+        functions.clear_appointments(browser)
         browser.end();
     }
 }
