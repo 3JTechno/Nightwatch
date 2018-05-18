@@ -13,7 +13,8 @@ module.exports={
 
     },
  
-    'change_start_time': function(browser){
+    tags: ['create_block'],
+    'create_block': function(browser){
 
         //Test Summary: create a block with the booking form and verify it is displayed on the calendar.
         //Create a block using mouse hover on empty slot ("block", "Offline", "Away")
