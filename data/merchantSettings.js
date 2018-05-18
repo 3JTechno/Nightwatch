@@ -1,5 +1,24 @@
 module.exports={
 
+    nightwatchTest3:{
+        url: 'https://test1.no.genbook.com/bookings/app/reservation/30027993',
+        username:'automation.nightwatch.3@gmail.com',
+        password:'Genbook$',
+        phone: '(555) 111-6666',
+        timezone: 'America/New_York',
+        businessHours:{
+            startTime: '09:00am',
+        },
+        category1: 'Default Category',
+        service1: 'Service1',
+        service2: 'Service2',
+        service2Duration: '02:00',
+        staff1: 'Staff 1',
+        staff1Id: '167660526',
+        staff2: 'Staff 2',
+        staff2Id: '167660544',
+    },
+
     nightwatchTest2:{
         url: 'https://test1.no.genbook.com/bookings/app/reservation/30027993',
         username:'automation.nightwatch.2@gmail.com',
