@@ -1,5 +1,5 @@
 var contactDetails = require('../data/testData').contactDetails
-var merchant = require('../data/merchantSettings').nightwatchTest2
+var merchant = require('../data/merchantSettings').nightwatchTest3
 var momentTimezone = require('moment-timezone')
 var functions = require('../functions.js')
 
@@ -14,6 +14,7 @@ module.exports={
 
     },
  
+    tags: ['email_phone_validation'],
     'email_phone_validation': function(browser){
 
         //Test Summary: open a booking, go in customer tab. Try 2 wrong formatted emails 

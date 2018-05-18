@@ -1,4 +1,4 @@
-var merchant = require('../data/merchantSettings').nightwatchTest2
+var merchant = require('../data/merchantSettings').nightwatchTest3
 var functions = require('../functions.js')
 
 module.exports={
@@ -12,6 +12,7 @@ module.exports={
 
     },
  
+    tags: ['change_start_time'],
     'change_start_time': function(browser){
 
         //Test Summary: open existing booking, change the start time and verify booking has moved on the calendar.

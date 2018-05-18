@@ -1,5 +1,5 @@
 var contactDetails = require('../data/testData').contactDetails;
-var merchant = require('../data/merchantSettings').nightwatchTest2;
+var merchant = require('../data/merchantSettings').nightwatchTest3;
 var moment = require('moment');
 var momentTimezone = require('moment-timezone');
 var functions = require('../functions.js');
@@ -15,6 +15,7 @@ module.exports = {
 
     },
 
+    tags: ['create_offline_booking'],
     'create_offline_booking': function (browser) {
 
         //Test Summary: click on a slot in the calendar, verify Date, time, staff, service. Select a customer
