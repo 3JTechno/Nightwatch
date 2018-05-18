@@ -1,3 +1,5 @@
+var util = require('util');
+
 let elements = {
     //Login Page Elements
     logInButton:{
@@ -35,6 +37,9 @@ let elements = {
     appointmentSlotMemo:{
         selector:'//div[@class="memoSummary"]'
     },
+    slot: {
+        selector: '//div[@id="%s"]'
+    }
 }
 
 for (key in elements){
@@ -45,5 +50,14 @@ for (key in elements){
 
 module.exports = {
   url:"",
-  elements: elements
+  elements: elements,
+  commands: [
+    {
+    //This function allows to inject a dynamic variable into a fixe selector
+      El: function (locator, variable) {
+        element = this.elements[locator.slice(1)].selector
+        return util.format(element, variable)
+      }
+    }
+  ],
 };

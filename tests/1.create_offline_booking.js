@@ -39,7 +39,7 @@ module.exports = {
 
         //Open booking form by clicking on calendar slot
         calendar
-            .waitAndClick('//div[@id="' + slotId + '"]')
+            .waitAndClick(calendar.el('@slot', slotId))
             .switchFrame('bookingForm');
 
         //Select a staff
