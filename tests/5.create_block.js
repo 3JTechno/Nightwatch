@@ -1,4 +1,4 @@
-var merchant = require('../data/merchantSettings').nightwatchTest2
+var merchant = require('../data/merchantSettings').nightwatchTest3
 var functions = require('../functions.js')
 var moment = require('moment')
 
@@ -13,7 +13,8 @@ module.exports={
 
     },
  
-    'change_start_time': function(browser){
+    tags: ['create_block'],
+    'create_block': function(browser){
 
         //Test Summary: create a block with the booking form and verify it is displayed on the calendar.
         //Create a block using mouse hover on empty slot ("block", "Offline", "Away")
