@@ -1,4 +1,4 @@
-var merchant = require('../data/merchantSettings').nightwatchTest2
+var merchant = require('../data/merchantSettings').nightwatchTest3
 var functions = require('../functions.js')
 var moment = require('moment')
 
