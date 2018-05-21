@@ -101,8 +101,8 @@ module.exports={
             .switchFrame('calendar-day-view')
     },
 
-    // after: function (browser){
-    //     functions.clear_appointments(browser)
-    //     browser.end();
-    // }
+    after: function (browser){
+        functions.clear_appointments(browser)
+        browser.end();
+    }
 }
