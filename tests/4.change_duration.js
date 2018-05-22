@@ -40,8 +40,8 @@ module.exports = {
             .waitAndClick('//span[text()="' + service + '"]')
             .expect.element('//span[@class="service-name"]').text.to.equal(service)
 
-        //Verify duration duration is compliant with the service selected
-        appointmentTab.expect.element('@duration').to.have.attribute('value').equals(defaultDuration);
+        //Verify duration is compliant with the service selected
+        appointmentTab.expect.element('@duration').to.have.attribute('value').equals(defaultDuration)
 
         //Add a note
         functions.add_note(note, appointmentTab)
@@ -83,12 +83,12 @@ module.exports = {
             .waitForElementVisible('@duration')
             .expect.element('@duration').to.have.attribute('value').equals(newDuration)
         appointmentTab
-            .click('@closeBtn')
+            .click('@saveButton')
             .switchFrame('calendar-day-view')
 
         //Reopen appointment
         calendar
-            .waitForElementVisible('@addAppointment')
+            // .waitForElementVisible('@addAppointment')
             .moveToElement("//div[@class='memoSummary'][text()='\"" + note + "\"']", 10, 10)
             .click("//div[@class='memoSummary'][text()='\"" + note + "\"']")
             .switchFrame('bookingForm')

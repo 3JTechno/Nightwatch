@@ -114,7 +114,7 @@ module.exports={
     },
 
     after: function (browser){
-        functions.clear_appointments(browser)
+        // functions.clear_appointments(browser)
         browser.end();
     }
 }

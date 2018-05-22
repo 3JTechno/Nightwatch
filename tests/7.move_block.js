@@ -97,12 +97,12 @@ module.exports={
             // .verify.value('@timeDropDown', time)
             .expect.element('@timeDropDown').text.equal(time)
         appointmentTab
-            .click('@saveButton')
+            .waitAndClick('@saveButton')
             .switchFrame('calendar-day-view')
     },
 
     after: function (browser){
-        functions.clear_appointments(browser)
+        // functions.clear_appointments(browser)
         browser.end();
     }
 }

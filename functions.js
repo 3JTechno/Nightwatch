@@ -64,6 +64,7 @@ module.exports={
 
         calendar
             .moveToElement(xpath,10 ,10)
+            .waitForElementVisible(xpath)
             .click(xpath)
             .switchFrame('bookingForm')
         appointmentTab
