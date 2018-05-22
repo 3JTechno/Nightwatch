@@ -85,6 +85,7 @@ module.exports={
             .mouseButtonDown(0)
             .moveToElement('//div[@id="' + block + '"]',10, 20)
             .mouseButtonUp(0)
+            .pause(4000)
         
         //Reopen appointment
         calendar
@@ -102,7 +103,7 @@ module.exports={
     },
 
     after: function (browser){
-        // functions.clear_appointments(browser)
+        functions.clear_appointments(browser)
         browser.end();
     }
 }

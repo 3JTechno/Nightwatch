@@ -73,11 +73,12 @@ module.exports={
             .waitForElementVisible('@duration')
             .expect.element('@duration').to.have.attribute('value').equals(newDuration)
         appointmentTab
-            .click('@closeBtn')
+            .click('@saveButton')
             .switchFrame('calendar-day-view')
     },
 
     after: function (browser){
+        functions.clear_appointments(browser)
         browser.end();
     }
 }

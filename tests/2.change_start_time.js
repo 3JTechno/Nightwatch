@@ -81,7 +81,7 @@ module.exports={
             .waitForElementVisible('@serviceDropDown')
             .expect.element('@timeDropDown').text.equal(newTime)
         appointmentTab
-            .click('@closeBtn')
+            .click('@saveButton')
             .switchFrame('calendar-day-view')
 
         //Drag and drop to original time slot
@@ -93,6 +93,7 @@ module.exports={
             .mouseButtonDown(0)
             .moveToElement('//div[@id="' + defaultSlotId + '"]',10, 50)
             .mouseButtonUp(0)
+            .pause(4000)
         
         //Reopen appointment
         browser
@@ -103,18 +104,14 @@ module.exports={
         //Check time has changed
         appointmentTab
             .waitForElementVisible('@serviceDropDown')
-            .expect.element('@timeDropDown').text.equal(merchant.businessHours.startTime)
-
-        //Cancel appointment
+            .expect.element('@timeDropDown').text.equal(merchant.businessHours.startTime);
         appointmentTab
-            .waitAndClick('@cancelAppointment')
-            .waitAndClick('@confirmationYes')
-            .switchFrame('calendar-day-view')
-            
+            .click('@saveButton')
+            .switchFrame('calendar-day-view');    
     },
 
     after: function (browser){
-        // functions.clear_appointments(browser)
+        functions.clear_appointments(browser)
         browser.end();
     }
 }

@@ -80,8 +80,7 @@ module.exports={
             .waitForElementVisible('@appointmentSlotName')
             .expect.element('@appointmentSlotName').text.to.equal(capFirstName + " " + capLastName);
         calendar.expect.element('@appointmentSlotPhone').text.to.equal(contactDetails.phone);
-        calendar.expect.element('@appointmentSlotMemo').text.to.equal('"' + note + '"'); //Calendar displays memo between quotess
-
+        calendar.expect.element('@appointmentSlotMemo').text.to.equal('"' + note + '"'); //Calendar displays memo between quotes
     },
 
     after: function (browser){

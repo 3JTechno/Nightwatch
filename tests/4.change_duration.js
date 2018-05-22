@@ -84,28 +84,11 @@ module.exports = {
             .expect.element('@duration').to.have.attribute('value').equals(newDuration)
         appointmentTab
             .click('@saveButton')
-            .switchFrame('calendar-day-view')
-
-        //Reopen appointment
-        calendar
-            // .waitForElementVisible('@addAppointment')
-            .moveToElement("//div[@class='memoSummary'][text()='\"" + note + "\"']", 10, 10)
-            .click("//div[@class='memoSummary'][text()='\"" + note + "\"']")
-            .switchFrame('bookingForm')
-
-        //Cancel appointment
-        appointmentTab
-            .waitAndClick('@cancelAppointment')
-            .waitAndClick('@confirmationYes')
-            .switchFrame('calendar-day-view')
-
-        //Verify appointment no longer appear on calendar
-        calendar
-            .expect.element("//div[@class='memoSummary'][text()='\"" + note + "\"']").to.not.be.present
+            .switchFrame('calendar-day-view');
     },
 
     after: function (browser) {
-
+        functions.clear_appointments(browser)
         browser.end();
     }
 }
