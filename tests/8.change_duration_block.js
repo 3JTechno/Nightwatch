@@ -16,8 +16,7 @@ module.exports={
     tags: ['change_duration_block'],
     'change_duration_block': function(browser){
 
-        //Test Summary: create a block with the booking form and verify it is displayed on the calendar.
-        //Create a block using mouse hover on empty slot ("block", "Offline", "Away")
+        //Test Summary: open existing block, change the duration and verify booking has changed duration on the calendar.
 
         //Test data preparation
         let time = merchant.businessHours.startTime //first block will be created at merchant start time

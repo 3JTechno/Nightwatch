@@ -17,7 +17,8 @@ module.exports={
     tags: ['move_block'],
     'move_block': function(browser){
 
-        //Test Summary: edit a block with the booking form and verify if changes are displayed on the calendar.
+        //Test Summary: open a block with the booking form, change start time, and verify if changes are displayed on the calendar.
+        //Then move it back to its original start time by draging and dropping the appointment.
 
         //Test data preparation
         let time = merchant.businessHours.startTime //first block will be created at merchant start time
