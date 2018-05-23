@@ -15,7 +15,7 @@ module.exports = {
     "port": 4444, // standard selenium ports
     "cli_args": {
       "webdriver.chrome.driver" : (isWin ?  "node_modules/chromedriver/lib/chromedriver/chromedriver.exe" : "node_modules/chromedriver/bin/chromedriver"),
-      "webdriver.gecko.driver" : "node_modules/geckodriver/bin/geckodriver",
+      "webdriver.gecko.driver" : (isWin ?  "node_modules/geckodriver/test/geckodriver.exe" : "node_modules/geckodriver/bin/geckodriver"),
       "webdriver.edge.driver" : "../MicrosoftWebDriver.exe"
     }
   },
