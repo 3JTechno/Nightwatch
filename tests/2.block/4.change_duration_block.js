@@ -1,5 +1,5 @@
-var merchant = require('../data/merchantSettings').nightwatchTest3
-var functions = require('../functions.js')
+var merchant = require('../../data/merchantSettings').nightwatchTest3
+var functions = require('../../functions.js')
 var moment = require('moment')
 
 module.exports={
@@ -29,7 +29,9 @@ module.exports={
         var appointmentTab = browser.page.appointmentTab()
 
         //Verify that no block already exists on the calendar page
-        calendar.expect.element('@blockText').to.not.be.present
+        calendar
+            .verify.elementNotPresent('@blockText', "No existing block on the calendar")
+            // .expect.element('@blockText').to.not.be.present
 
         //Hover on a slot and click "Block"
         calendar
@@ -40,8 +42,8 @@ module.exports={
         //Verify block is displayed on the calendar
         calendar
             .waitForElementVisible('@blockText')
-            // .verify.visible('@blockText')
-            .expect.element('@blockText').to.be.visible
+            .assert.visible('@blockText', "Block is displayed on calendar")
+            // .expect.element('@blockText').to.be.visible
 
         //Open booking form by clicking on calendar slot
         calendar
@@ -49,13 +51,16 @@ module.exports={
             .switchFrame('bookingForm')
 
         //Verify duration is set to default
-        appointmentTab.expect.element('@duration').to.have.attribute('value').equals(defaultDuration)
+        appointmentTab
+            .verify.value('@duration', defaultDuration)
+            // .expect.element('@duration').to.have.attribute('value').equals(defaultDuration)
 
         //Change duration
         appointmentTab
             .click('@duration')
             .setValue('@duration', newDuration)
-            .expect.element('@duration').to.have.attribute('value').equals(newDuration)
+            .verify.value('@duration', newDuration)
+            // .expect.element('@duration').to.have.attribute('value').equals(newDuration)
 
         //Save appointment
         appointmentTab
@@ -70,7 +75,8 @@ module.exports={
         //Check duration has changed and close booking form
         appointmentTab
             .waitForElementVisible('@duration')
-            .expect.element('@duration').to.have.attribute('value').equals(newDuration)
+            .verify.value('@duration', newDuration)
+            // .expect.element('@duration').to.have.attribute('value').equals(newDuration)
         appointmentTab
             .click('@saveButton')
             .switchFrame('calendar-day-view')

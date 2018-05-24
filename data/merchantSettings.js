@@ -14,10 +14,10 @@ module.exports={
         service1: 'Service1',
         service1Duration: '02:00',
         service2: 'Service2',
-        service2Duration: '02:00',
+        service2Duration: '01:00',
         staff1: 'Staff 1',
         staff1Id: '167660526',
-        staff2: 'Staff 2',
+        staff2: 'Staff 2',      //No access to service2
         staff2Id: '167660544',
     },
 

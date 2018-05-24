@@ -1,6 +1,6 @@
-var contactDetails = require('../data/testData').contactDetails;
-var merchant = require('../data/merchantSettings').nightwatchTest3
-var functions = require('../functions.js')
+var contactDetails = require('../../data/testData').contactDetails;
+var merchant = require('../../data/merchantSettings').nightwatchTest3
+var functions = require('../../functions.js')
 var moment = require('moment')
 
 module.exports={
