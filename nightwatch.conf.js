@@ -1,5 +1,6 @@
 const SCREENSHOT_PATH = "./screenshots/";
 var data = require('./data/testData.js');
+var isWin = process.platform === "win32";
 var seleniumServer = require('selenium-server');
 var seleniumPath = seleniumServer.path;
 
