@@ -1,6 +1,7 @@
 const SCREENSHOT_PATH = "./screenshots/";
 var data = require('./data/testData.js');
-var isWin = process.platform === "win32";
+var seleniumServer = require('selenium-server');
+var seleniumPath = seleniumServer.path;
 
 module.exports = {
   "src_folders": "tests",
@@ -9,17 +10,17 @@ module.exports = {
   "output_folder": "./reports", // reports (test outcome) output by nightwatch
   "selenium": {
     "start_process": true, // tells nightwatch to start/stop the selenium process
-    "server_path": (isWin ? "../../Downloads/selenium-server-standalone-3.8.0.jar" : "../selenium-server-standalone-3.8.0.jar"),
+    "server_path": seleniumPath,
     "launch_url": "http://localhost:4444/wd/hub",
     "host": "127.0.0.1",
     "port": 4444, // standard selenium ports
     "cli_args": {
-      "webdriver.chrome.driver" : (isWin ?  "node_modules/chromedriver/lib/chromedriver/chromedriver.exe" : "node_modules/chromedriver/bin/chromedriver"),
-      "webdriver.gecko.driver" : (isWin ?  "node_modules/geckodriver/test/geckodriver.exe" : "node_modules/geckodriver/bin/geckodriver"),
-      "webdriver.edge.driver" : "../MicrosoftWebDriver.exe"
+        "webdriver.chrome.driver" : (isWin ?  "node_modules/chromedriver/lib/chromedriver/chromedriver.exe" : "node_modules/chromedriver/bin/chromedriver"),
+        "webdriver.gecko.driver" : (isWin ?  "node_modules/geckodriver/test/geckodriver.exe" : "node_modules/geckodriver/bin/geckodriver"),
+        "webdriver.edge.driver" : "../MicrosoftWebDriver.exe"
     }
   },
-  //Whether or not to run individual test files in parallel. If set to "true", runs the tests in parallel and determines the number of workers automatically.
+  //Whether or not to run individual test files in parallel. If set to "true", runs the tests in parallel and determines the number of workers automatically. 
   //If set to an object, can specify specify the number of workers as "auto" or a "number".
   //"test_workers" : {"enabled" : true, "workers" : "3"}, //runs tests automatically
     "test_settings": {
@@ -60,7 +61,7 @@ module.exports = {
             "desiredCapabilities" : {
                 "browserName" : "safari",
                 "safari.options": {
-                    "technologyPreview": true
+                    "technologyPreview": true 
                 },
                 "javascriptEnabled" : true,
                 "acceptSslCerts" : true

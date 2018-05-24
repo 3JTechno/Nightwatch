@@ -16,7 +16,8 @@
     "geckodriver": "^1.11.0",
     "moment": "^2.21.0",
     "moment-timezone": "^0.5.16",
-    "nightwatch": "^0.9.19"
+    "nightwatch": "^0.9.19",
+    "selenium-server": "^3.8.0"
   },
   "devDependencies": {}
 }
