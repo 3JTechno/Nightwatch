@@ -1,9 +1,9 @@
 module.exports={
 
     nightwatchTest3:{
-        url: 'https://test1.no.genbook.com/bookings/app/reservation/30027993',
+        url: 'https://test1.no.company.com/bookings/app/reservation/30027993',
         username:'automation.nightwatch.3@gmail.com',
-        password:'Genbook$',
+        password:'company$',
         phone: '(555) 111-6666',
         timezone: 'America/New_York',
         businessHours:{
@@ -22,9 +22,9 @@ module.exports={
     },
 
     nightwatchTest2:{
-        url: 'https://test1.no.genbook.com/bookings/app/reservation/30027993',
+        url: 'https://test1.no.company.com/bookings/app/reservation/30027993',
         username:'automation.nightwatch.2@gmail.com',
-        password:'Genbook$',
+        password:'company$',
         phone: '(555) 111-6666',
         timezone: 'America/New_York',
         businessHours:{
@@ -34,7 +34,7 @@ module.exports={
             firstName: 'jeremy',
             lastName: 'giraudet',
             phone: '(202) 555-0133',
-            email: 'jeremy.genbook@gmail.com',
+            email: 'jeremy.company@gmail.com',
         },
         category1: 'Default Category',
         service1: 'Service1',
@@ -47,7 +47,7 @@ module.exports={
     /* Other Merchants Account data
 
     'jeremyCarRemovalProd':{
-        'url': 'https://test6.no.genbook.com/bookings/app/reservation/30367670',
+        'url': 'https://test6.no.company.com/bookings/app/reservation/30367670',
         'category1': 'Default Category',
         'category2': 'Service Category #2',
         'service1': 'Car Removal ($300.00)',
@@ -58,7 +58,7 @@ module.exports={
     },
 
     'Test 3 & Professional Physio ':{
-        'url': 'https://test3.no.genbook.com/manager/serviceprovider/30021173',
+        'url': 'https://test3.no.company.com/manager/serviceprovider/30021173',
         'category1': 'General',
         'category2': 'Soccer Injury',
         'service1': 'Muscle Injury (No Payment)',
@@ -71,7 +71,7 @@ module.exports={
             'firstName': 'Jeremy',
             'lastName': 'Giraudet',
             'phone': '(555) 111-888',
-            'email': 'jeremy.genbook@gmail.com',
+            'email': 'jeremy.company@gmail.com',
         },
         'timezone': 'America/New_York',
         businessHours:{
@@ -82,9 +82,9 @@ module.exports={
 
     //Account use for CBSAP testing
     'nightwatchTest1':{
-        'url': 'https://test1.no.genbook.com/bookings/app/reservation/30027713',
+        'url': 'https://test1.no.company.com/bookings/app/reservation/30027713',
         'username':'automation.nightwatch.1@gmail.com',
-        'password':'Genbook$',
+        'password':'company$',
         'phone': '(555) 111-6666',
         'timezone': 'America/New_York',
         businessHours:{
@@ -105,7 +105,7 @@ module.exports={
             'firstName': 'jeremy',
             'lastName': 'giraudet',
             'phone': '(202) 555-0133',
-            'email': 'jeremy.genbook@gmail.com',
+            'email': 'jeremy.company@gmail.com',
             'memo': 'Nightwatch Memo: '
         },
         'category1': 'Default Category',
@@ -124,7 +124,7 @@ module.exports={
     },
 
     'jeremyCarRemovalProd':{
-        'url': 'https://test6.no.genbook.com/bookings/app/reservation/30367670',
+        'url': 'https://test6.no.company.com/bookings/app/reservation/30367670',
         'category1': 'Default Category',
         'category2': 'Service Category #2',
         'service1': 'Car Removal ($300.00)',
@@ -135,7 +135,7 @@ module.exports={
     },
 
     'Test 3 & Professional Physio ':{
-        'url': 'https://test3.no.genbook.com/manager/serviceprovider/30021173',
+        'url': 'https://test3.no.company.com/manager/serviceprovider/30021173',
         'category1': 'General',
         'category2': 'Soccer Injury',
         'service1': 'Muscle Injury (No Payment)',
@@ -148,7 +148,7 @@ module.exports={
             'firstName': 'Jeremy',
             'lastName': 'Giraudet',
             'phone': '(555) 111-888',
-            'email': 'jeremy.genbook@gmail.com',
+            'email': 'jeremy.company@gmail.com',
         },
         'timezone': 'America/New_York',
         businessHours:{

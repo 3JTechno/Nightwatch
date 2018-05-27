@@ -1,8 +1,8 @@
 module.exports={
 
     contactDetails:{
-        userName: 'jeremy.genbook@gmail.com',
-        password: 'Genbook$',
+        userName: 'jeremy.company@gmail.com',
+        password: 'company$',
         firstName: 'automation',
         lastName : 'nightwatch',
         phone : '(202) 555-0133',

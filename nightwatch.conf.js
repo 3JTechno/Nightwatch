@@ -27,7 +27,7 @@ module.exports = {
     "test_settings": {
         "default": {
             "use_xpath": true,
-            "launch_url" : "https://test1.no.genbook.com/",
+            "launch_url" : "https://test1.no.company.com/",
             "screenshots": {
                 "enabled": true, // if you want to keep screenshots
                 "on_failure": true,
